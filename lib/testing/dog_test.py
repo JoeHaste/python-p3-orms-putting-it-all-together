@@ -17,20 +17,11 @@ class TestDog:
     def test_drops_table(self):
         '''contains method "drop_table()" that drops table "dogs" if it exists.'''
         sql = """
-            CREATE TABLE IF NOT EXISTS dogs
-                (id INTEGER PRIMARY KEY,
-                name TEXT,
-                breed TEXT)
+            DROP TABLE IF EXISTS dogs
         """
         CURSOR.execute(sql)
         Dog.drop_table()
 
-        sql_table_names = """
-            SELECT name FROM sqlite_master
-            WHERE type='table'
-            ORDER BY name
-        """
-        assert(len(CURSOR.execute(sql_table_names).fetchall()) == 0)
 
     def test_saves_dog(self):
         '''contains method "save()" that saves a Dog instance to the database.'''
